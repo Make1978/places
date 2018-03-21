@@ -16,6 +16,7 @@
 		0B3B47BC2063042200286BDD /* placesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3B47BB2063042200286BDD /* placesUITests.swift */; };
 		0B3B47CE2063081D00286BDD /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3B47CD2063081D00286BDD /* Venue.swift */; };
 		0B3B47D02063083A00286BDD /* FoursquareService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3B47CF2063083A00286BDD /* FoursquareService.swift */; };
+		0B3B47D22063098F00286BDD /* VenuePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3B47D12063098F00286BDD /* VenuePresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		0B3B47BD2063042200286BDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0B3B47CD2063081D00286BDD /* Venue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Venue.swift; sourceTree = "<group>"; };
 		0B3B47CF2063083A00286BDD /* FoursquareService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoursquareService.swift; sourceTree = "<group>"; };
+		0B3B47D12063098F00286BDD /* VenuePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenuePresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 		0B3B479A2063042100286BDD /* places */ = {
 			isa = PBXGroup;
 			children = (
+				0B3B47D12063098F00286BDD /* VenuePresenter.swift */,
 				0B3B47CF2063083A00286BDD /* FoursquareService.swift */,
 				0B3B47CD2063081D00286BDD /* Venue.swift */,
 				0B3B479B2063042100286BDD /* AppDelegate.swift */,
@@ -267,6 +270,7 @@
 			files = (
 				0B3B47D02063083A00286BDD /* FoursquareService.swift in Sources */,
 				0B3B479E2063042100286BDD /* VenueViewController.swift in Sources */,
+				0B3B47D22063098F00286BDD /* VenuePresenter.swift in Sources */,
 				0B3B47CE2063081D00286BDD /* Venue.swift in Sources */,
 				0B3B479C2063042100286BDD /* AppDelegate.swift in Sources */,
 			);
