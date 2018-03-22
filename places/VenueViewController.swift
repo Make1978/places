@@ -16,14 +16,17 @@ struct VenuesViewData {
 
 protocol VenueView: NSObjectProtocol {
     func startSearching()
-    func finnishSearching()
+    func finishSearching()
     func setVenues(venues: [VenuesViewData])
     func setEmptyVenues()
 }
 
 class VenueViewController: UIViewController {
     
+    @IBOutlet weak var searchBar: UISearchBar?
     @IBOutlet weak var tableView: UITableView?
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView?
+    
     private let presenter = VenuePresenter(foursquareService: FoursquareService())
     private var venuesToDisplay = [VenuesViewData]()
 
@@ -31,6 +34,7 @@ class VenueViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         tableView?.dataSource = self
+        activityIndicator?.hidesWhenStopped = true
         presenter.attachView(view: self)
         presenter.searchVenues(keyword: "")
     }
@@ -44,11 +48,11 @@ class VenueViewController: UIViewController {
 extension VenueViewController : VenueView {
     
     func startSearching() {
-        // TODO: show activity indicator
+        activityIndicator?.startAnimating()
     }
     
-    func finnishSearching() {
-        // TODO: hide activity indicator
+    func finishSearching() {
+        activityIndicator?.stopAnimating()
     }
     
     func setVenues(venues: [VenuesViewData]) {

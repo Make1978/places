@@ -33,7 +33,7 @@ class VenuePresenter {
     func searchVenues(keyword: String) {
         self.venueView?.startSearching()
         foursquareService.searchVenues(keyword: keyword) { [weak self] venues in
-            self?.venueView?.finnishSearching()
+            self?.venueView?.finishSearching()
             if( venues.count == 0) {
                 self?.venueView?.setEmptyVenues()
             } else {
