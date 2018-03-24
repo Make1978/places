@@ -1,5 +1,8 @@
 language: objective-c
 osx_image: xcode9.2
-xcode_project: places.xcodeproj # path to your xcodeproj folder
-xcode_scheme: places
-xcode_sdk: iphonesimulator11.2
+##xcode_project: places.xcodeproj # path to your xcodeproj folder
+##xcode_scheme: places
+##xcode_sdk: iphonesimulator11.2
+script:
+    - xcodebuild clean build build-for-testing -sdk iphonesimulator -project places.xcodeproj -scheme places CODE_SIGNING_REQUIRED=NO
+    - xctool -workspace places.xcodeproj/project.xcworkspace -scheme places -sdk iphonesimulator run-tests
