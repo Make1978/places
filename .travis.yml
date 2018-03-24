@@ -1,5 +1,5 @@
 language: objective-c
 osx_image: xcode9.2
 xcode_project: places.xcodeproj # path to your xcodeproj folder
-xcode_scheme: placesTests
+xcode_scheme: places
 xcode_sdk: iphonesimulator11.2
