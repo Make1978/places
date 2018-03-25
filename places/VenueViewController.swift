@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 struct VenuesViewData {
     let name: String
@@ -29,14 +30,23 @@ class VenueViewController: UIViewController {
     
     private let presenter = VenuePresenter(foursquareService: FoursquareService())
     private var venuesToDisplay = [VenuesViewData]()
+    
+    //private var ll :String?
+    
+    lazy var locationManager : CLLocationManager = {
+        $0.delegate = self
+        return $0
+    }(CLLocationManager())
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         tableView?.dataSource = self
+        searchBar?.delegate = self
         activityIndicator?.hidesWhenStopped = true
         presenter.attachView(view: self)
         presenter.searchVenues(keyword: "")
+        locationManager.requestLocation()
     }
 
     override func didReceiveMemoryWarning() {
@@ -81,6 +91,37 @@ extension VenueViewController : UITableViewDataSource {
         cell.textLabel?.text = data.name
         cell.detailTextLabel?.text = data.address
         return cell
+    }
+}
+
+extension VenueViewController : UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        presenter.searchVenues(keyword: searchText)
+    }
+}
+
+extension VenueViewController : CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.last else { return }
+        presenter.setLocation(location: location)
+        //ll = "\(location.coordinate.longitude),\(location.coordinate.latitude)"
+        locationManager.stopUpdatingLocation();
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        guard CLLocationManager.locationServicesEnabled(),
+            [ .authorizedAlways, .authorizedWhenInUse ].contains(CLLocationManager.authorizationStatus())
+            else {
+                locationManager.requestWhenInUseAuthorization()
+                return
+                
+        }
+        locationManager.startUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        
     }
     
 }

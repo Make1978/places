@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import CoreLocation
 @testable import places
 
 class FoursquareServiceMock: FoursquareService {
@@ -14,7 +15,7 @@ class FoursquareServiceMock: FoursquareService {
     init( venues: [Venue] ) {
         self.venues = venues;
     }
-    override func searchVenues(keyword: String, callback: ([Venue]) -> Void) {
+    override func searchVenues(keyword: String, location: CLLocation, callback: @escaping ([Venue]) -> Void) {
         callback(venues)
     }
 }
@@ -47,7 +48,7 @@ class VenuePresenterTest: XCTestCase {
     let emptyVenueFoursquareMock = FoursquareServiceMock(venues: [])
     
     let oneVenueFoursquareMock = FoursquareServiceMock(venues: [
-        Venue(id: "a", name: "b", location: Location(distance: 0, formattedAddress: "a"))])
+        Venue(id: "a", name: "b", location: Location(distance: 0, formattedAddress: [ "a" ]))])
     
     override func setUp() {
         super.setUp()
@@ -64,6 +65,7 @@ class VenuePresenterTest: XCTestCase {
         let venueView = VenueViewMock()
         let presenterUnderTest = VenuePresenter(foursquareService: emptyVenueFoursquareMock)
         presenterUnderTest.attachView(view: venueView)
+        presenterUnderTest.setLocation(location: CLLocation(latitude: 65.01234, longitude: 25.46816))
         presenterUnderTest.searchVenues(keyword: " asdf")
         XCTAssertTrue(venueView.finishSearchingCalled && venueView.startSearchingCalled)
     }
@@ -72,6 +74,7 @@ class VenuePresenterTest: XCTestCase {
         let venueView = VenueViewMock()
         let presenterUnderTest = VenuePresenter(foursquareService: emptyVenueFoursquareMock)
         presenterUnderTest.attachView(view: venueView)
+        presenterUnderTest.setLocation(location: CLLocation(latitude: 65.01234, longitude: 25.46816))
         presenterUnderTest.searchVenues(keyword: " asdf")
         XCTAssertTrue(venueView.setEmptyViewCalled)
     }
@@ -81,6 +84,7 @@ class VenuePresenterTest: XCTestCase {
         
         let presenterUnderTest = VenuePresenter(foursquareService: oneVenueFoursquareMock)
         presenterUnderTest.attachView(view: venueView)
+        presenterUnderTest.setLocation(location: CLLocation(latitude: 65.01234, longitude: 25.46816))
         presenterUnderTest.searchVenues(keyword: " asdf")
         XCTAssertTrue(venueView.setVenuesCalled)
     }
