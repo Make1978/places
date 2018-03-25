@@ -12,8 +12,8 @@ import CoreLocation
 class FoursquareService {
     
     let API_URL = "https://api.foursquare.com/v2/"
-    let CLIENT_ID = "CYEMKOM4OLTP5PHMOFVUJJAMWT5CH5G1JBCYREATW21XLLSZ"
-    let CLIENT_SECRET = "GYNP4URASNYRNRGXR5UEN2TGTKJHXY5FGSAXTIHXEUG1GYM2"
+    let CLIENT_ID = ""
+    let CLIENT_SECRET = ""
     
     var dataTask: URLSessionDataTask?
     
